@@ -15,10 +15,15 @@ func ConnectDatabase() {
 		panic("Failed to connect to Database")
 	}
 
-	// err = database.AutoMigrate(&Book{})
-	// if err != nil {
-	// 	return
-	// }
+	err = database.AutoMigrate(&User{})
+	if err != nil {
+		return
+	}
+
+	err = database.AutoMigrate(&Post{})
+	if err != nil {
+		return
+	}
 
 	DB = database
 }
