@@ -20,6 +20,10 @@ type LoginInput struct {
 	Password string `json:"password" binding:"required"`
 }
 
+type LogoutInput struct {
+	ID uint `json:"ID" binding:"required"`
+}
+
 // POST /users
 // add new users
 func CreateUser(c *gin.Context) {
@@ -83,6 +87,7 @@ func Login(c *gin.Context) {
 	user, err := models.GetUserFromUsername(input.Username)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "cannot find User"})
+		return
 	}
 
 	if !libs.CheckPassword(user.Password, input.Password, []byte(user.Salt)) {
@@ -91,17 +96,43 @@ func Login(c *gin.Context) {
 	}
 
 	// Try Get Token
-	// OK
-	//	return {id, token}
-	// Not Ok
-	//	create net token
-	//	retunr {id, token}
+	if user.SessionToken == "0" || user.SessionToken == "" {
+		token, err := models.SetToken(user.ID)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+			return
+		}
 
-	c.JSON(http.StatusOK, gin.H{"id": user.ID})
+		c.JSON(http.StatusOK, gin.H{"id": user.ID, "token": token})
+		return
+
+	}
+
+	c.JSON(http.StatusOK, gin.H{"id": user.ID, "token": user.SessionToken})
 }
 
 // POST /logout
-// log out a useer
+// log out a user
 func Logout(c *gin.Context) {
+
+	token, err := libs.GetTokenFromHeader(c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "cannot find User"})
+		return
+	}
+
+	user, err := models.GetUserFromToken(token)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "cannot find User"})
+		return
+	}
+
+	_, err = models.RemoveToken(user.ID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed To remove token from user"})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, gin.H{"id": user.ID})
 
 }
