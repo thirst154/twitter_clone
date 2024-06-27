@@ -6,6 +6,9 @@ import (
 	"encoding/hex"
 )
 
+///https://www.gregorygaines.com/blog/how-to-hash-and-salt-passwords-in-golang-using-sha512-and-why-you-shouldnt/
+// ^^^ Code mostly from this website for this file ONLY
+
 const SaltSize = 16
 
 func GenerateRandomSalt(saltSize int) []byte {
