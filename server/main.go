@@ -25,7 +25,12 @@ func main() {
 	//authorized.POST("/users/:id/follow")
 	//authorized.POST("/users/:id/follow")
 	r.POST("/login", controllers.Login)
-	r.POST("/logout", controllers.Logout)
+	authorized.POST("/logout", controllers.Logout)
+
+	authorized.POST("/posts", controllers.AddPost)
+	r.GET("/posts/:id", controllers.GetPost)
+	authorized.PATCH("/posts/:id", controllers.UpdatePost)
+	authorized.DELETE("/posts/:id", controllers.DeletePost)
 
 	err := r.Run()
 	if err != nil {

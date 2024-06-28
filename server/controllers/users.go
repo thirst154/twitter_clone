@@ -51,13 +51,7 @@ func CreateUser(c *gin.Context) {
 
 	models.DB.Create(&user)
 
-	database_user, err := models.GetUserFromUsername(user.Username)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Cannot find created user"})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"ID": database_user.ID})
+	c.JSON(http.StatusOK, gin.H{"ID": user.ID})
 }
 
 // GET /users/:id
@@ -116,15 +110,9 @@ func Login(c *gin.Context) {
 func Logout(c *gin.Context) {
 
 	// Get Auth
-	token, err := libs.GetAuth(c)
+	user, err := libs.GetTokenReturnUser(c)
 	if err != nil {
-		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token Required"})
-		return
-	}
-
-	user, err := models.GetUserFromToken(token)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "cannot find User"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Cannot Find User"})
 		return
 	}
 

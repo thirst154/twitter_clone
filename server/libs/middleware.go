@@ -7,18 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// func IsAuthenticated(token string) (*models.User, error) {
-// 	if token == "0" || token == "" {
-// 		return nil, nil
-// 	}
-// 	user, err := models.GetUserFromToken(token)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-
-// 	return user, nil
-// }
-
 type AuthHeader struct {
 	Auth string `header:"X-Authorization"`
 }
@@ -47,16 +35,4 @@ func IsAuthenticated() gin.HandlerFunc {
 		c.Next()
 
 	}
-}
-
-func GetAuth(c *gin.Context) (string, error) {
-	var auth AuthHeader
-	// Get Auth
-	if err := c.ShouldBindHeader(&auth); err != nil {
-		return "", err
-	}
-
-	token := auth.Auth
-
-	return token, nil
 }

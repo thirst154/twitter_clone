@@ -15,10 +15,10 @@ A CRUD API backend written in go using gin for api requests and GORM for a sqlit
 - [X] Logout endpoint needs to destroy session token
 
 #### Posts
-- [ ] Add post "/posts"
-- [ ] Get Post "/posts/:id"
-- [ ] Patch posts "/posts/:id"
-- [ ] delete posts "/posts/:id"
+- [X] Add post "/posts"
+- [X] Get Post "/posts/:id"
+- [X] Patch posts "/posts/:id"
+- [X] delete posts "/posts/:id"
 
 ## Front End
 
