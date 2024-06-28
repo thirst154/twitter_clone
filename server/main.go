@@ -25,7 +25,7 @@ func main() {
 	//authorized.POST("/users/:id/follow")
 	//authorized.POST("/users/:id/follow")
 	r.POST("/login", controllers.Login)
-	authorized.POST("/logout", controllers.Logout)
+	r.POST("/logout", controllers.Logout)
 
 	err := r.Run()
 	if err != nil {

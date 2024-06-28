@@ -20,15 +20,15 @@ import (
 // }
 
 type AuthHeader struct {
-	Auth string `header:"X-Authorization" binding:"required"`
+	Auth string `header:"X-Authorization"`
 }
 
 func IsAuthenticated() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		token, err := GetTokenFromHeader(c)
+		token, err := GetAuth(c)
 		if err != nil {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Unauthoerized"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token Required"})
 			return
 		}
 
@@ -49,12 +49,14 @@ func IsAuthenticated() gin.HandlerFunc {
 	}
 }
 
-func GetTokenFromHeader(c *gin.Context) (string, error) {
+func GetAuth(c *gin.Context) (string, error) {
 	var auth AuthHeader
 	// Get Auth
-	if err := c.ShouldBindHeader(auth); err != nil {
+	if err := c.ShouldBindHeader(&auth); err != nil {
 		return "", err
 	}
 
-	return auth.Auth, nil
+	token := auth.Auth
+
+	return token, nil
 }

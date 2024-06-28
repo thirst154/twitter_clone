@@ -17,7 +17,7 @@ func GenerateRandomSalt(saltSize int) []byte {
 	_, err := rand.Read(salt[:])
 
 	if err != nil {
-		panic(err)
+		panic("Failed To generate Salt")
 	}
 
 	return salt

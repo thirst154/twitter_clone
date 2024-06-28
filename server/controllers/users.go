@@ -115,9 +115,10 @@ func Login(c *gin.Context) {
 // log out a user
 func Logout(c *gin.Context) {
 
-	token, err := libs.GetTokenFromHeader(c)
+	// Get Auth
+	token, err := libs.GetAuth(c)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "cannot find User"})
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token Required"})
 		return
 	}
 
@@ -134,5 +135,4 @@ func Logout(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusAccepted, gin.H{"id": user.ID})
-
 }

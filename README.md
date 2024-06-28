@@ -10,9 +10,9 @@ A CRUD API backend written in go using gin for api requests and GORM for a sqlit
 
 #### Users
 - [ ] Add create session token w/ lifetime
-- [ ] Add check session token function
-- [ ] Login endpoint needs to return id and sessions token 
-- [ ] Logout endpoint needs to destroy session token
+- [X] Add check session token function
+- [X] Login endpoint needs to return id and sessions token 
+- [X] Logout endpoint needs to destroy session token
 
 #### Posts
 - [ ] Add post "/posts"

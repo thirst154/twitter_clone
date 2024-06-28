@@ -59,7 +59,15 @@ func updateToken(ID uint, token string) (string, error) {
 }
 
 func RemoveToken(ID uint) (string, error) {
-	return updateToken(ID, "0")
+	return updateToken(ID, "")
+}
+
+func SetToken(ID uint) (string, error) {
+	token, err := randomHex(20)
+	if err != nil {
+		return "", err
+	}
+	return updateToken(ID, string(token))
 }
 
 func randomHex(n int) (string, error) {
@@ -68,9 +76,4 @@ func randomHex(n int) (string, error) {
 		return "", err
 	}
 	return hex.EncodeToString(bytes), nil
-}
-
-func SetToken(ID uint) (string, error) {
-	token, _ := randomHex(20)
-	return updateToken(ID, string(token))
 }
