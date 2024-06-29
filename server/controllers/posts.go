@@ -57,8 +57,35 @@ func GetPost(c *gin.Context) {
 		return
 	}
 
+	returnPost, err := libs.FormatPost(post)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Server Failure"})
+	}
+
 	// return post
-	c.JSON(http.StatusOK, gin.H{"ID": post.ID, "text": post.Text, "date_published": post.DatePublished})
+	c.JSON(http.StatusOK, gin.H{"data": returnPost})
+}
+
+// Get /posts
+// return all posts
+func GetAllPosts(c *gin.Context) {
+	var posts []models.Post
+
+	models.DB.Find(&posts)
+
+	var returnPosts []libs.ReturnPost
+	for _, post := range posts {
+		newPost, err := libs.FormatPost(post)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Server Failure"})
+		}
+		returnPosts = append(
+			returnPosts,
+			newPost,
+		)
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": returnPosts})
 }
 
 // PATCH /posts/:id

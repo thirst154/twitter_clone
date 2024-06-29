@@ -28,6 +28,7 @@ func main() {
 	authorized.POST("/logout", controllers.Logout)
 
 	authorized.POST("/posts", controllers.AddPost)
+	r.GET("/posts", controllers.GetAllPosts)
 	r.GET("/posts/:id", controllers.GetPost)
 	authorized.PATCH("/posts/:id", controllers.UpdatePost)
 	authorized.DELETE("/posts/:id", controllers.DeletePost)
