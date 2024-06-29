@@ -1,29 +1,33 @@
-import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Textarea } from "./ui/textarea";
+import { CornerDownLeft, Mic, Paperclip } from "lucide-react"
 
-export default function NewMessageForm() {
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
+export default function Component() {
   return (
-    <Card className="mx-auto w-full">
-      <CardHeader>
-        <CardTitle className="text-xl">Send New Message</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="grid w-full gap-1.5">
-          <Label htmlFor="message">Your message</Label>
-          <Textarea placeholder="Type your message here." id="message" />
-          <Button type="submit">Send</Button>
-        </div>
-      </CardContent>
-    </Card>
-  );
+    <form
+      className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
+    >
+      <Label htmlFor="message" className="sr-only">
+        Message
+      </Label>
+      <Textarea
+        id="message"
+        placeholder="Type your message here..."
+        className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
+      />
+      <div className="flex items-center p-3 pt-0">
+        <Button type="submit" size="sm" className="ml-auto gap-1.5">
+          Send Message
+          <CornerDownLeft className="size-3.5" />
+        </Button>
+      </div>
+    </form>
+  )
 }
