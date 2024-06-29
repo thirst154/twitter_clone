@@ -27,5 +27,22 @@ Simple Website for posting messages written using the NextJS framework with Tail
 ### TODO
 
 #### INIT
-- [ ] Init NJS
-- [ ] Install Tailwind
+- [X] Init NJS
+- [X] Install Tailwind
+- [X] init shadcnui
+- [X] build navbar
+- [X] Init Pages
+  - [X] Login
+  - [X] Create Account
+  - [X] Home
+  - [X] Messages
+- [ ] Messages Form
+- [ ] Message Component
+- [ ] API Req
+  - [ ] Login
+  - [ ] Create Account
+  - [ ] Get Messages
+  - [ ] Send new Message
+  - [ ] logout
+  - [ ] update message
+  - [ ] delete message
