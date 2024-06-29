@@ -11,6 +11,7 @@ export default function NavBar(){
      </nav>
      <nav className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
       <Link href="/login" className="text-primary font-semibold">Login</Link>
+      <Link href="/signup" className="text-primary font-semibold">Sign Up</Link>
      </nav>
     </header>
   )

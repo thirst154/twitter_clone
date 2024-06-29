@@ -15,8 +15,8 @@ import { Trash2 } from "lucide-react"
 export function ConfirmDeleteDialog() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="ghost"><Trash2  size={20} /></Button>
+      <AlertDialogTrigger asChild className="flex gap-2">
+        <Button variant="ghost"><Trash2  size={20} /> Delete</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
