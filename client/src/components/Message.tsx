@@ -10,7 +10,7 @@ export default function Message(post: Post) {
     <div className="flex flex-col rounded-lg border bg-background p-3">
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-red-400 rounded-full border"></div>
+          <div className="w-10 h-10 bg-primary rounded-full border"></div>
           <div className="grid max-w-fit items-center">
             <span className="text-lg font-semibold">
               {user.first_name} {user.last_name}
